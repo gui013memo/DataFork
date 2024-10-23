@@ -28,98 +28,169 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            label1 = new Label();
-            label2 = new Label();
-            textBox2 = new TextBox();
-            label3 = new Label();
-            textBox3 = new TextBox();
+            lastReadingsTextBox = new TextBox();
+            lastReadingsLabel = new Label();
+            sentToTMSLabel = new Label();
+            sentToTMSTextBox = new TextBox();
+            sentToSQSLabel = new Label();
+            sentToSQSTextBox = new TextBox();
+            connectionStateCOM3 = new Label();
+            connectionStateCOM10 = new Label();
+            connectionStateCOM12 = new Label();
+            connectButton = new Button();
             SuspendLayout();
             // 
-            // textBox1
+            // lastReadingsTextBox
             // 
-            textBox1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(12, 49);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(347, 143);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "VBKABP21110004720S1070TB1B1EK1617111BBBBCCC\r\n[)>\u001e06\u001dVT6MP\u001dP2410007010\u001dT230627L1C1A0026\u001d\u001e\u00040026\r\n";
+            lastReadingsTextBox.BackColor = Color.White;
+            lastReadingsTextBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lastReadingsTextBox.Location = new Point(12, 49);
+            lastReadingsTextBox.Multiline = true;
+            lastReadingsTextBox.Name = "lastReadingsTextBox";
+            lastReadingsTextBox.ReadOnly = true;
+            lastReadingsTextBox.ScrollBars = ScrollBars.Vertical;
+            lastReadingsTextBox.Size = new Size(347, 143);
+            lastReadingsTextBox.TabIndex = 1;
+            lastReadingsTextBox.Text = "VBKABP21110004720S1070TB1B1EK1617111BBBBCCC\r\n[)>\u001e06\u001dVT6MP\u001dP2410007010\u001dT230627L1C1A0026\u001d\u001e\u00040026\r\n";
             // 
-            // label1
+            // lastReadingsLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(96, 14);
-            label1.Name = "label1";
-            label1.Size = new Size(177, 32);
-            label1.TabIndex = 1;
-            label1.Text = "Ultimas leituras";
+            lastReadingsLabel.AutoSize = true;
+            lastReadingsLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lastReadingsLabel.Location = new Point(43, 14);
+            lastReadingsLabel.Name = "lastReadingsLabel";
+            lastReadingsLabel.Size = new Size(286, 32);
+            lastReadingsLabel.TabIndex = 0;
+            lastReadingsLabel.Text = "Ultimas leituras - COM3";
             // 
-            // label2
+            // sentToTMSLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(96, 214);
-            label2.Name = "label2";
-            label2.Size = new Size(186, 32);
-            label2.TabIndex = 3;
-            label2.Text = "Enviado ao TMS";
+            sentToTMSLabel.AutoSize = true;
+            sentToTMSLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            sentToTMSLabel.Location = new Point(4, 204);
+            sentToTMSLabel.Name = "sentToTMSLabel";
+            sentToTMSLabel.Size = new Size(355, 25);
+            sentToTMSLabel.TabIndex = 3;
+            sentToTMSLabel.Text = "Enviado ao TMS - COM10 para COM11";
             // 
-            // textBox2
+            // sentToTMSTextBox
             // 
-            textBox2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(12, 249);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(347, 143);
-            textBox2.TabIndex = 2;
-            textBox2.Text = "VBKABP21110004720S1070TB1B1EK1617111BBBBCCC\r\n[)>\u001e06\u001dVT6MP\u001dP2410007010\u001dT230627L1C1A0026\u001d\u001e\u00040026\r\n";
+            sentToTMSTextBox.BackColor = Color.White;
+            sentToTMSTextBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            sentToTMSTextBox.Location = new Point(12, 241);
+            sentToTMSTextBox.Multiline = true;
+            sentToTMSTextBox.Name = "sentToTMSTextBox";
+            sentToTMSTextBox.ReadOnly = true;
+            sentToTMSTextBox.ScrollBars = ScrollBars.Vertical;
+            sentToTMSTextBox.Size = new Size(347, 143);
+            sentToTMSTextBox.TabIndex = 2;
+            sentToTMSTextBox.Text = "VBKABP21110004720S1070TB1B1EK1617111BBBBCCC\r\n";
             // 
-            // label3
+            // sentToSQSLabel
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(98, 423);
-            label3.Name = "label3";
-            label3.Size = new Size(182, 32);
-            label3.TabIndex = 5;
-            label3.Text = "Enviado ao SQS";
+            sentToSQSLabel.AutoSize = true;
+            sentToSQSLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            sentToSQSLabel.Location = new Point(8, 404);
+            sentToSQSLabel.Name = "sentToSQSLabel";
+            sentToSQSLabel.Size = new Size(351, 25);
+            sentToSQSLabel.TabIndex = 5;
+            sentToSQSLabel.Text = "Enviado ao SQS - COM12 para COM13";
             // 
-            // textBox3
+            // sentToSQSTextBox
             // 
-            textBox3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox3.Location = new Point(12, 458);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(347, 143);
-            textBox3.TabIndex = 4;
-            textBox3.Text = "VBKABP21110004720S1070TB1B1EK1617111BBBBCCC\r\n[)>\u001e06\u001dVT6MP\u001dP2410007010\u001dT230627L1C1A0026\u001d\u001e\u00040026\r\n";
+            sentToSQSTextBox.BackColor = Color.White;
+            sentToSQSTextBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            sentToSQSTextBox.Location = new Point(12, 432);
+            sentToSQSTextBox.Multiline = true;
+            sentToSQSTextBox.Name = "sentToSQSTextBox";
+            sentToSQSTextBox.ReadOnly = true;
+            sentToSQSTextBox.ScrollBars = ScrollBars.Vertical;
+            sentToSQSTextBox.Size = new Size(347, 143);
+            sentToSQSTextBox.TabIndex = 4;
+            sentToSQSTextBox.Text = "[)>\u001e06\u001dVT6MP\u001dP2410007010\u001dT230627L1C1A0026\u001d\u001e\u00040026\r\n";
+            // 
+            // connectionStateCOM3
+            // 
+            connectionStateCOM3.AutoSize = true;
+            connectionStateCOM3.BackColor = Color.Red;
+            connectionStateCOM3.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            connectionStateCOM3.ForeColor = Color.White;
+            connectionStateCOM3.Location = new Point(14, 578);
+            connectionStateCOM3.Name = "connectionStateCOM3";
+            connectionStateCOM3.Size = new Size(99, 37);
+            connectionStateCOM3.TabIndex = 6;
+            connectionStateCOM3.Text = " COM3";
+            // 
+            // connectionStateCOM10
+            // 
+            connectionStateCOM10.AutoSize = true;
+            connectionStateCOM10.BackColor = Color.Red;
+            connectionStateCOM10.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            connectionStateCOM10.ForeColor = Color.White;
+            connectionStateCOM10.Location = new Point(120, 578);
+            connectionStateCOM10.Name = "connectionStateCOM10";
+            connectionStateCOM10.Size = new Size(114, 37);
+            connectionStateCOM10.TabIndex = 7;
+            connectionStateCOM10.Text = " COM10";
+            // 
+            // connectionStateCOM12
+            // 
+            connectionStateCOM12.AutoSize = true;
+            connectionStateCOM12.BackColor = Color.Red;
+            connectionStateCOM12.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            connectionStateCOM12.ForeColor = Color.White;
+            connectionStateCOM12.Location = new Point(240, 578);
+            connectionStateCOM12.Name = "connectionStateCOM12";
+            connectionStateCOM12.Size = new Size(114, 37);
+            connectionStateCOM12.TabIndex = 8;
+            connectionStateCOM12.Text = " COM12";
+            // 
+            // connectButton
+            // 
+            connectButton.BackColor = Color.DarkOliveGreen;
+            connectButton.FlatStyle = FlatStyle.Flat;
+            connectButton.Font = new Font("Segoe UI", 22F, FontStyle.Regular, GraphicsUnit.Point);
+            connectButton.ForeColor = Color.White;
+            connectButton.Location = new Point(12, 618);
+            connectButton.Name = "connectButton";
+            connectButton.Size = new Size(343, 60);
+            connectButton.TabIndex = 9;
+            connectButton.Text = "CONNECTAR";
+            connectButton.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(371, 729);
-            Controls.Add(label3);
-            Controls.Add(textBox3);
-            Controls.Add(label2);
-            Controls.Add(textBox2);
-            Controls.Add(label1);
-            Controls.Add(textBox1);
+            ClientSize = new Size(371, 682);
+            Controls.Add(connectButton);
+            Controls.Add(connectionStateCOM12);
+            Controls.Add(connectionStateCOM10);
+            Controls.Add(connectionStateCOM3);
+            Controls.Add(sentToSQSLabel);
+            Controls.Add(sentToSQSTextBox);
+            Controls.Add(sentToTMSLabel);
+            Controls.Add(sentToTMSTextBox);
+            Controls.Add(lastReadingsLabel);
+            Controls.Add(lastReadingsTextBox);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
-        private Label label1;
-        private Label label2;
-        private TextBox textBox2;
-        private Label label3;
-        private TextBox textBox3;
+        private TextBox lastReadingsTextBox;
+        private Label lastReadingsLabel;
+        private Label sentToTMSLabel;
+        private TextBox sentToTMSTextBox;
+        private Label sentToSQSLabel;
+        private TextBox sentToSQSTextBox;
+        private Label connectionStateCOM3;
+        private Label connectionStateCOM10;
+        private Label connectionStateCOM12;
+        private Button connectButton;
     }
 }
