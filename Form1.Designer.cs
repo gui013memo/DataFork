@@ -1,6 +1,6 @@
 ﻿namespace DataFork
 {
-    partial class Form1
+    partial class SerialDataFork
     {
         /// <summary>
         ///  Required designer variable.
@@ -147,7 +147,7 @@
             // 
             // connectButton
             // 
-            connectButton.BackColor = Color.DarkOliveGreen;
+            connectButton.BackColor = Color.ForestGreen;
             connectButton.FlatStyle = FlatStyle.Flat;
             connectButton.Font = new Font("Segoe UI", 22F, FontStyle.Regular, GraphicsUnit.Point);
             connectButton.ForeColor = Color.White;
@@ -158,7 +158,7 @@
             connectButton.Text = "CONNECTAR";
             connectButton.UseVisualStyleBackColor = false;
             // 
-            // Form1
+            // SerialDataFork
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -173,8 +173,8 @@
             Controls.Add(sentToTMSTextBox);
             Controls.Add(lastReadingsLabel);
             Controls.Add(lastReadingsTextBox);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "SerialDataFork";
+            Text = "SerialDataFork";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();

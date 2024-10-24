@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataFork
 {
-    public partial class Form1 : Form
+    public partial class SerialDataFork : Form
     {
 
         SerialPort receivingSerialPort;
@@ -13,9 +13,13 @@ namespace DataFork
 
         Logger logger;
 
-        
+        string WantedData = string.Empty;
 
-        public Form1()
+        bool bSTX = false;
+        bool bETX = false;
+        StringBuilder sb = new StringBuilder();
+
+        public SerialDataFork()
         {
             InitializeComponent();
 
@@ -33,7 +37,7 @@ namespace DataFork
 
             sendingToTMSSerialPort = new SerialPort
             {
-                PortName = "COM10",
+                PortName = "COM10", //OUTPUT = COM11
                 BaudRate = 9600,
                 Parity = Parity.None,
                 DataBits = 8,
@@ -43,7 +47,7 @@ namespace DataFork
 
             sendingToSQSSerialPort = new SerialPort
             {
-                PortName = "COM12",
+                PortName = "COM12", //OUTPUT COM13
                 BaudRate = 9600,
                 Parity = Parity.None,
                 DataBits = 8,
@@ -123,25 +127,21 @@ namespace DataFork
             else
             {
                 connectButton.Enabled = true;
-                connectButton.BackColor = Color.ForestGreen;
+                connectButton.BackColor = Color.Gray;
             }
         }
 
         private void ReceivingSerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
 
-            string WantedData = string.Empty;
-            bool isTMSData = false;
-            bool bSTX = false;
-            bool bETX = false;
-            StringBuilder sb = new StringBuilder();
+            
 
             try
             {
                 // Read the incoming data
                 string rawDataFromScanner = receivingSerialPort.ReadExisting();
 
-                //Log($"{now.ToString("yyyy-MM-dd HH:mm:ss")} : ReadExisting : {Data}");
+                logger.Log("RawData: " + rawDataFromScanner);
 
                 foreach (char c in rawDataFromScanner)
                 {
@@ -171,39 +171,15 @@ namespace DataFork
 
                         logger.Log("Data received from " + receivingSerialPort.PortName + ": " + WantedData);
 
+                        ProcessBarcode(WantedData);
                         bSTX = false;
                         bETX = false;
                     }
+
+
                 }
 
-                // Send the data to TMS if the conditions are met
-                if (sendingToTMSSerialPort.IsOpen &&
-                    (WantedData.Contains("LEFTT") || WantedData.Contains("RIGHT") ||
-                    (WantedData.Length >= 32 && WantedData.Contains("B1B1"))))
-                {
-                    sendingToTMSSerialPort.Write(WantedData);
-                    logger.Log("Data sent to TMS on " + sendingToTMSSerialPort.PortName + ": " + WantedData);
-                    isTMSData = true;
 
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        sentToTMSTextBox.Text += WantedData + "\r\n";
-                    });
-                }
-
-                // Send the data to SQS
-                if (sendingToSQSSerialPort.IsOpen && !isTMSData)
-                {
-                    sendingToSQSSerialPort.Write(WantedData);
-
-                    logger.Log("Data sent to SQS on " + sendingToSQSSerialPort.PortName + ": " + WantedData);
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        sentToSQSTextBox.Text += WantedData + "\r\n";
-                    });
-                }
-
-                isTMSData = false;
             }
             catch (Exception exc)
             {
@@ -211,6 +187,40 @@ namespace DataFork
                 logger.Log(errorMessage);
                 MessageBox.Show(errorMessage, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ProcessBarcode(string WantedData)
+        {
+            bool isTMSData = false;
+
+            // Send the data to TMS 
+            if (sendingToTMSSerialPort.IsOpen &&
+                (WantedData.Contains("LEFTT") || WantedData.Contains("RIGHT") ||
+                (WantedData.Length == 45 && WantedData.Contains("B1B1"))))
+            {
+                sendingToTMSSerialPort.Write(WantedData);
+                logger.Log("Data sent to TMS on " + sendingToTMSSerialPort.PortName + ": " + WantedData);
+                isTMSData = true;
+
+                this.Invoke((MethodInvoker)delegate
+                {
+                    sentToTMSTextBox.Text += WantedData + "\r\n";
+                });
+            }
+
+            // Send the data to SQS
+            if (sendingToSQSSerialPort.IsOpen && !isTMSData)
+            {
+                sendingToSQSSerialPort.Write(WantedData);
+
+                logger.Log("Data sent to SQS on " + sendingToSQSSerialPort.PortName + ": " + WantedData);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    sentToSQSTextBox.Text += WantedData + "\r\n";
+                });
+            }
+
+            isTMSData = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
