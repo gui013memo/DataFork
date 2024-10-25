@@ -196,7 +196,7 @@ namespace DataFork
             // Send the data to TMS 
             if (sendingToTMSSerialPort.IsOpen &&
                 (WantedData.Contains("LEFTT") || WantedData.Contains("RIGHT") ||
-                (WantedData.Length == 45 && WantedData.Contains("B1B1"))))
+                (WantedData.Length == 45 && WantedData.Contains("B1B2"))))
             {
                 sendingToTMSSerialPort.Write(WantedData);
                 logger.Log("Data sent to TMS on " + sendingToTMSSerialPort.PortName + ": " + WantedData);

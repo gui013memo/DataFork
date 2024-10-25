@@ -174,7 +174,7 @@
             Controls.Add(lastReadingsLabel);
             Controls.Add(lastReadingsTextBox);
             Name = "SerialDataFork";
-            Text = "SerialDataFork";
+            Text = "NewKappa-DataFork";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
